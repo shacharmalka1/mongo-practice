@@ -1,8 +1,8 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const user = require("./model/usersScheme");
-const post = require("./model/postsScheme");
-const commnet = require("./model/commentsScheme");
+const User = require("./model/usersScheme");
+const Post = require("./model/postsScheme");
+const Commnet = require("./model/commentsScheme");
 const uri = `mongodb+srv://shachar:${process.env.PASSWORD}@cluster0.oriwg.mongodb.net/mongo_practice?retryWrites=true&w=majority`;
 async function connect() {
   console.log(process.env.PASSWORD);
@@ -58,12 +58,12 @@ const postsArray = [
 
 async function insertUsers(usersArray) {
   await usersArray.forEach((user) => {
-    user.create(user);
+    User.create(user);
   });
 }
 async function insertPosts(postsArray) {
   await postsArray.forEach((post) => {
-    post.create(post);
+    Post.create(post);
   });
 }
 
@@ -93,28 +93,28 @@ insertPosts(postsArray);
 
 const query = {
   async findAllUsers() {
-    const res = await user.find();
+    const res = await User.find();
     console.log(res);
   },
   async findAllPost() {
-    const res = await post.find();
+    const res = await Post.find();
     console.log(res);
   },
   async findUserPosts(userName) {
-    const res = await post.find({ username: userName });
+    const res = await Post.find({ username: userName });
     console.log(res);
   },
   async findAllComments() {
-    const res = await commnet.find();
+    const res = await Commnet.find();
     console.log(res);
   },
   async findUserComments(userName) {
-    const res = await commnet.find({ username: userName });
+    const res = await Commnet.find({ username: userName });
     console.log(res);
   },
   async findPostComments() {
-    const post = await post.findOne({ title: "Steals your identity" });
-    const res = await commnet.find({ post: post._id });
+    const post = await Post.findOne({ title: "Steals your identity" });
+    const res = await Commnet.find({ post: post._id });
     console.log(post._id);
     console.log(res);
   },
