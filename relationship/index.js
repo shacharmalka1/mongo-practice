@@ -2,7 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const User = require("./model/usersScheme");
 const Post = require("./model/postsScheme");
-const Commnet = require("./model/commentsScheme");
+const Comment = require("./model/commentsScheme");
 const uri = `mongodb+srv://shachar:${process.env.PASSWORD}@cluster0.oriwg.mongodb.net/mongo_practice?retryWrites=true&w=majority`;
 async function connect() {
   console.log(process.env.PASSWORD);
@@ -84,11 +84,12 @@ async function addComment() {
   await Comment.create({
     username: "ScumbagSteve",
     comment: "Denied your PR cause I found a hack",
-    post: "618d1d67b7736fd7b3c94dbc",
+    post: "618d1d67b7736fd7b3c94dba",
   });
 }
-insertUsers(usersArray);
-insertPosts(postsArray);
+
+// insertUsers(usersArray);
+// insertPosts(postsArray);
 // addComment()
 
 const query = {
